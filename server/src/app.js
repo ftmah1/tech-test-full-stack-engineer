@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/ships', shipsController.getShips);
 app.post('/ships/upload/:shipId', shipsController.uploadShipImage);
 
+//Start the scheduled task to refresh the database and cache every 24 hours
+shipService.refreshDatabaseAndCacheEvery24Hours();
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
-  //Start the scheduled task to update the database and cache every 24 hours
-  shipService.refreshDatabaseAndCacheEvery24Hours();
 });
