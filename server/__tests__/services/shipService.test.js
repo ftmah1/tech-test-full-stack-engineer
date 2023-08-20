@@ -4,12 +4,12 @@ const shipService = require('../../src/services/shipService');
 const shipController = require('../../src/controllers/shipController');
 const dbPool = require('../../src/db');
 const axios = require('axios');
-const cacheMiddleware = require('../../src/middleware/cacheMiddleware');
+const cacheMiddleware = require('../../src/cache/cacheService');
 
 jest.mock('../../src/db');
 
 jest.mock('axios');
-jest.mock('../../src/middleware/cacheMiddleware');
+jest.mock('../../src/cache/cacheService');
 
 describe('shipService', () => {
   afterEach(() => {

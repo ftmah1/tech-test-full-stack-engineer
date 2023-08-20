@@ -1,7 +1,7 @@
 const NodeCache = require('node-cache');
 const cache = new NodeCache({ stdTTL: 86400 }); // 24 hours TTL
 
-const cacheMiddleware = {
+const cacheService = {
   cacheData: (key, data) => {
     cache.set(key, data);
   },
@@ -15,4 +15,4 @@ const cacheMiddleware = {
   },
 };
 
-module.exports = cacheMiddleware;
+module.exports = cacheService;

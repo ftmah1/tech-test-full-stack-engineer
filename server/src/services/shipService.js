@@ -1,7 +1,7 @@
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
 const dbPool = require('../db');
-const cacheMiddleware = require('../middleware/cacheMiddleware');
+const cacheService = require('../cache/cacheService');
 const cron = require('node-cron');
 const uuid = require('uuid');
 
@@ -20,7 +20,7 @@ const shipService = {
   },
 
   getShipsFromCache: async (key) => {
-    return cacheMiddleware.getFromCache(key);
+    return cacheService.getFromCache(key);
   },
 
   getShipsFromDatabase: async (shipType, weight, homePort) => {
@@ -77,7 +77,7 @@ const shipService = {
       const insertQuery =
         'INSERT INTO spaceData (id, shipId, shipType, weight, homePort, shipName, class) VALUES ?';
       connection.query(insertQuery, [values]);
-      cacheMiddleware.cacheData('ships', ships);
+      cacheService.cacheData('ships', ships);
       await connection.commit();
       console.log('data inserted successfully');
     } catch (e) {

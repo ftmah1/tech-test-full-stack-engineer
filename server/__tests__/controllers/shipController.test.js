@@ -1,6 +1,6 @@
 const shipsController = require('../../src/controllers/shipController');
 const shipService = require('../../src/services/shipService');
-const cacheMiddleware = require('../../src/middleware/cacheMiddleware');
+const cacheMiddleware = require('../../src/cache/cacheService');
 const {
   validateQueryParameters,
   calculatePaginationLimits,
@@ -8,7 +8,7 @@ const {
 const uuid = require('uuid');
 
 jest.mock('../../src/services/shipService');
-jest.mock('../../src/middleware/cacheMiddleware');
+jest.mock('../../src/cache/cacheService');
 jest.mock('../../src/utilities');
 
 describe('shipsController', () => {
