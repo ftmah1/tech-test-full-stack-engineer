@@ -120,8 +120,9 @@ const shipService = {
 
   deleteAndInsetRecordsInDatabaseAndCache: async (ships) => {
     try {
+      cacheService.clearCache('ships');
       // no need to put transaction around delete.
-      // It's acceptable just for delete operation to succeed
+      // It's acceptable just for delete operation to succeed and insert operation to not succeed
       const deleteQuery = 'DELETE FROM spaceData';
       await dbPool.query(deleteQuery);
       await shipService.insertRecordsInDatabaseAndCache(ships);
