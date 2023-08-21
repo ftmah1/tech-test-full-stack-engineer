@@ -141,7 +141,7 @@ const shipService = {
     ]);
     if (updateResult.affectedRows > 0) {
       // refresh cache data with latest data from db after image update
-      const ships = shipService.getShipsFromDatabase();
+      const ships = await shipService.getShipsFromDatabase();
       cacheService.cacheData('ships', ships);
       updated = true;
     }
