@@ -133,12 +133,19 @@ const shipService = {
   },
 
   updateShipImage: async (shipId, imageData) => {
+    let updated = false;
     const updateImageQuery = 'UPDATE spaceData SET shipImage = ? WHERE id = ?';
     const updateResult = await dbPool.query(updateImageQuery, [
       imageData,
       shipId,
     ]);
-    return updateResult.affectedRows > 0;
+    if (updateResult.affectedRows > 0) {
+      // refresh cache data with latest data from db after image update
+      const ships = shipService.getShipsFromDatabase();
+      cacheService.cacheData('ships', ships);
+      updated = true;
+    }
+    return updated;
   },
 };
 
