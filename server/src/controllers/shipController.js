@@ -56,7 +56,7 @@ const shipsController = {
 
       // database ships are filtered from query
       // below code is for applying filter to ships from api & cache
-      if (shipType || homePort || (weight && !areShipsFromDb)) {
+      if (shipType || homePort || weight && !areShipsFromDb) {
         ships = applyFilters(ships, shipType, weight, homePort);
       }
 
